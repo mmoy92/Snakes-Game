@@ -27,7 +27,11 @@ public class World
     float              tickTime        = 0;
     static float       tick            = TICK_INITIAL;
 
-
+    public World (Snake newSnake, Token newToken)
+    {
+        snake = newSnake;
+        token = newToken;
+    }
     // ----------------------------------------------------------
     /**
      * Spawns random tokens within the world array.

@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, CS2114SnakesActivity!</string>
     <string name="app_name">CS2114 Snakes</string>
+    <string name="Left"></string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
 
 </resources>
