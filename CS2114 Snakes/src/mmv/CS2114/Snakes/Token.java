@@ -19,10 +19,8 @@ public class Token
 {
 
     // Fields --------------------------------------------------------------
-    @SuppressWarnings("unused")
-    private int x;
-    @SuppressWarnings("unused")
-    private int y;
+    public int x;
+    public int y;
 
     // Constructors --------------------------------------------------------
 
