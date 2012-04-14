@@ -1,5 +1,7 @@
 package mmv.CS2114.Snakes;
 
+import java.util.Observable;
+import java.util.Observer;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -29,8 +31,34 @@ public class WorldView
     }
 
 
+    public void setWorld(World newWorld)
+    {
+        this.world = newWorld;
+    }
+
+
     public void onDraw(Canvas canvas)
     {
+        onMeasure(getWidth(), getHeight());
+
+        int boardSize = 10 * 13;
+        int squareSize = getWidth() / (10 * 13);
+
+        Paint paintGrid = new Paint();
+        paintGrid.setStyle(Style.STROKE);
+        paintGrid.setColor(Color.BLUE);
+
+        for (int y = 0; y < boardSize; y++)
+        {
+            for (int x = 0; x < boardSize; x++)
+            {
+
+                canvas.drawRect(x * squareSize, y * squareSize, (x + 1)
+                    * squareSize, (y + 1) * squareSize, paintGrid);
+
+            }
+        }
+
         // Set up paint object
         Paint paint = new Paint();
         paint.setColor(Color.CYAN);
@@ -58,6 +86,62 @@ public class WorldView
             token.x + 5,
             paint);
 
+    }
+
+
+    /**
+     * An observer that listens for changes made to the Maze Model. THis is a
+     * nested class inside the view so that it can still access methods that
+     * belong to the surrounding view.
+     */
+    private class WorldObserver
+        implements Observer
+    {
+
+        // ~ Methods ...........................................................
+
+        // ----------------------------------------------------------
+
+        /**
+         * Called when the Maze (model) is changed (for example the value of the
+         * cell is set to a different value.
+         * 
+         * @param observable
+         *            the Observable object that was changed
+         * @param data
+         *            extra data about the notification; unused here
+         */
+        public void update(Observable observable, Object data)
+        {
+            // The invalidate() method is used to force a view to be repainted
+            // at the earliest opportunity (which in most cases is essentially
+            // immediately, but may not always be). Note that this is a method
+            // on the View class, not the Observer.
+            invalidate();
+
+        }
+
+    }
+
+
+    /**
+     * Overridden to force the view to be square (have the same width and
+     * height).
+     * 
+     * @param widthMeasureSpec
+     *            the desired width as determined by the layout
+     * @param heightMeasureSpec
+     *            the desired height as determined by the layout
+     */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        // Choose the smallest of the two dimensions to use for both.
+        int measureSpec = Math.min(widthMeasureSpec, heightMeasureSpec);
+
+        // Call the superclass implementation but pass it our modified width
+        // and height instead of the incoming ones.
+        super.onMeasure(measureSpec, measureSpec);
     }
 
 }
