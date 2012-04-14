@@ -18,16 +18,24 @@ package mmv.CS2114.Snakes;
 public class Token
 {
 
-    private int x, y;
+    // Fields --------------------------------------------------------------
+    @SuppressWarnings("unused")
+    private int x;
+    @SuppressWarnings("unused")
+    private int y;
 
-    public Token()
-    {
-        x = 0;
-        y = 0;
-    }
+    // Constructors --------------------------------------------------------
+
+    /**
+     * Constructor dealing with creating the new Token class.  Sets the
+     * coordinates for token to the given x and y coordinates for the board.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
     public Token(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
+
 }
