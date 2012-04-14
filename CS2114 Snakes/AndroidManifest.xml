@@ -4,14 +4,16 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="3" />
+    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name" android:debuggable="true">
         <activity
             android:name=".CS2114SnakesActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
