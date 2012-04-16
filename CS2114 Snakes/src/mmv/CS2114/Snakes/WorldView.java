@@ -27,13 +27,18 @@ public class WorldView
     public WorldView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        world = new World();
+
     }
 
 
     public void setWorld(World newWorld)
     {
-        this.world = newWorld;
+        world = newWorld;
+        if(world == null)
+        {
+            return;
+        }
+        world.addObserver(new WorldObserver());
     }
 
 
@@ -41,24 +46,8 @@ public class WorldView
     {
         onMeasure(getWidth(), getHeight());
 
-        int boardSize = 10 * 13;
-        int squareSize = getWidth() / (10 * 13);
-
-        Paint paintGrid = new Paint();
-        paintGrid.setStyle(Style.STROKE);
-        paintGrid.setColor(Color.BLUE);
-
-        for (int y = 0; y < boardSize; y++)
-        {
-            for (int x = 0; x < boardSize; x++)
-            {
-
-                canvas.drawRect(x * squareSize, y * squareSize, (x + 1)
-                    * squareSize, (y + 1) * squareSize, paintGrid);
-
-            }
-        }
-
+        
+        
         // Set up paint object
         Paint paint = new Paint();
         paint.setColor(Color.CYAN);

@@ -1,5 +1,7 @@
 package mmv.CS2114.Snakes;
 
+
+import java.util.Observable;
 import java.util.Random;
 
 // -------------------------------------------------------------------------
@@ -11,7 +13,7 @@ import java.util.Random;
  * @version 2012.04.14
  */
 
-public class World
+public class World extends Observable
 {
     static final int   WORLD_WIDTH     = 10;
     static final int   WORLD_HEIGHT    = 13;

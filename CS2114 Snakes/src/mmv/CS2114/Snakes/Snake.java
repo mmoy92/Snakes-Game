@@ -1,5 +1,6 @@
 package mmv.CS2114.Snakes;
 
+import java.util.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *  @author Mike Gazdich (mgazdich)
  *  @version 2012.04.14
  */
-public class Snake
+public class Snake extends Observable
 {
 
     // Fields ---------------------------------------------------------------
@@ -52,6 +53,8 @@ public class Snake
         {
             direction = UP;
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -64,6 +67,8 @@ public class Snake
         {
             direction = RIGHT;
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -73,6 +78,8 @@ public class Snake
     {
         SnakePart end = parts.get(parts.size() - 1);
         parts.add(new SnakePart(end.x, end.y));
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -131,6 +138,9 @@ public class Snake
         {
             head.y = 0;
         }
+        
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -151,7 +161,10 @@ public class Snake
                 return true;
             }
         }
+        setChanged();
+        notifyObservers();
         return false;
+        
     }
 }
 
