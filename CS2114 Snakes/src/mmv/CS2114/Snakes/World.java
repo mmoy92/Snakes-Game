@@ -29,10 +29,15 @@ public class World extends Observable
     float              tickTime        = 0;
     static float       tick            = TICK_INITIAL;
 
-    public World (Snake newSnake, Token newToken)
+   /* public World (Snake newSnake, Token newToken)
     {
         snake = newSnake;
         token = newToken;
+    }*/
+    public World()
+    {
+        snake = new Snake();
+        placeToken();
     }
     // ----------------------------------------------------------
     /**

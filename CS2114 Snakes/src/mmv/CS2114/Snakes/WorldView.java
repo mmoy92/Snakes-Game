@@ -34,7 +34,7 @@ public class WorldView
     public void setWorld(World newWorld)
     {
         world = newWorld;
-        if(world == null)
+        if (world == null)
         {
             return;
         }
@@ -44,10 +44,8 @@ public class WorldView
 
     public void onDraw(Canvas canvas)
     {
-        onMeasure(getWidth(), getHeight());
 
-        
-        
+
         // Set up paint object
         Paint paint = new Paint();
         paint.setColor(Color.CYAN);
@@ -113,24 +111,5 @@ public class WorldView
     }
 
 
-    /**
-     * Overridden to force the view to be square (have the same width and
-     * height).
-     * 
-     * @param widthMeasureSpec
-     *            the desired width as determined by the layout
-     * @param heightMeasureSpec
-     *            the desired height as determined by the layout
-     */
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
-        // Choose the smallest of the two dimensions to use for both.
-        int measureSpec = Math.min(widthMeasureSpec, heightMeasureSpec);
-
-        // Call the superclass implementation but pass it our modified width
-        // and height instead of the incoming ones.
-        super.onMeasure(measureSpec, measureSpec);
-    }
 
 }

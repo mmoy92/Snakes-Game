@@ -4,16 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
-    <View
-        android:id="@+id/WorldView"
-        android:layout_width="wrap_content"
-        android:layout_height="390dp"
-        android:layout_weight="1" />
+    
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -24,15 +15,19 @@
             android:id="@+id/leftButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/left" android:onClick="leftButtonClick"/>
+            android:onClick="leftButtonClick"
+            android:text="@string/left" />
 
-        <Space android:layout_height="match_parent" android:layout_width="210dp"/>
+        <Space
+            android:layout_width="210dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/right" android:onClick="rightButtonClick"/>
+            android:onClick="rightButtonClick"
+            android:text="@string/right" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,8 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <Space android:layout_height="match_parent" />
+       
 
+       
     </LinearLayout>
+    <mmv.CS2114.Snakes.WorldView android:id="@+id/worldView1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -32,23 +32,24 @@ public class SnakeActivity
         // Retrieve mazeView
         worldView = (WorldView)findViewById(R.id.WorldView);
 
-        snake = new Snake();
-        token = new Token(1, 5);
+        //snake = new Snake();
+        //token = new Token(1, 5);
 
         // Create new maze, assign it to the mazeView
-        world = new World(snake, token);
+        world = new World();
         worldView.setWorld(world);
 
     }
 
 
-    public void leftButtonClick(View view)
+    public void leftButtonClick(View view, float deltaTime)
     {
         world.snake.turnLeft();
+        world.update(deltaTime);
     }
 
 
-    public void rightButtonClick(View view)
+    public void rightButtonClick(View view, float deltaTime)
     {
         world.snake.turnRight();
     }
