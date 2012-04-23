@@ -4,8 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -34,11 +32,11 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-       
-
-       
     </LinearLayout>
-    <mmv.CS2114.Snakes.WorldView android:id="@+id/worldView1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <mmv.CS2114.Snakes.WorldView
+        android:id="@+id/WorldView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
