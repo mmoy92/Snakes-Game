@@ -1,5 +1,7 @@
 package mmv.CS2114.Snakes;
 
+
+
 import java.util.Observable;
 import java.util.Observer;
 import android.graphics.Color;
@@ -45,48 +47,31 @@ public class WorldView
     public void onDraw(Canvas canvas)
     {
 
-        // Set up paint object
         Paint paint = new Paint();
         paint.setColor(Color.CYAN);
         paint.setStyle(Style.FILL);
 
-       
-        
-        
         // Get box tile size
-        float boxSize = getWidth() / 13;
-        // SnakePart head = world.snake.parts.get(0);
+        float boxSize = getWidth() / world.WORLD_WIDTH;
+        SnakePart head = world.snake.parts.get(0);
 
-       /* Snake snake = new Snake();
-        SnakePart head = snake.parts.get(0);
-
-        canvas.drawRect(
-            (head.y * (boxSize)),
-            (head.x * (boxSize)),
-            (head.y * (boxSize)),
-            (head.x * (boxSize)),
-            paint);
-
+        canvas.drawRect(head.y - 5, head.x - 5, head.y + 5, head.x + 5, paint);
         paint.setColor(Color.BLUE);
-        for (SnakePart sp : snake.parts)
+        for (SnakePart sp : world.snake.parts)
         {
             if (!sp.equals(head))
             {
-                canvas.drawRect(
-                    (sp.y * (boxSize)),
-                    (sp.x * (boxSize)),
-                    (sp.y * (boxSize)),
-                    (sp.x * (boxSize)),
-                    paint);
+                canvas.drawRect(sp.y - 5, sp.x - 5, sp.y + 5, sp.x + 5, paint);
             }
         }
-        // paint.setColor(Color.GREEN);
-*/
-        /*
-         * Token token = world.token; canvas.drawRect( (float)(token.y - (0.5 *
-         * boxSize)), (float)(token.x - (0.5 * boxSize)), (float)(token.y + (0.5
-         * * boxSize)), (float)(token.x + (0.5 * boxSize)), paint);
-         */
+        paint.setColor(Color.GREEN);
+        Token token = world.token;
+        canvas.drawRect(
+            token.y - 5,
+            token.x - 5,
+            token.y + 5,
+            token.x + 5,
+            paint);
 
     }
 

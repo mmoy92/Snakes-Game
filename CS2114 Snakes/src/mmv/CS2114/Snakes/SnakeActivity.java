@@ -30,14 +30,14 @@ public class SnakeActivity
         setContentView(R.layout.main);
 
         // Retrieve mazeView
-        worldView = (WorldView)findViewById(R.id.WorldView);
+        //worldView = (WorldView)findViewById(R.id.WorldView);
 
-        // snake = new Snake();
-        // token = new Token(1, 5);
+        snake = new Snake();
+        token = new Token(1, 5);
 
         // Create new maze, assign it to the mazeView
-        world = new World();
-        worldView.setWorld(world);
+        //world = new World(snake, token);
+        //worldView.setWorld(world);
 
     }
 
