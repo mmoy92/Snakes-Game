@@ -36,7 +36,7 @@ public class World extends Observable
     }*/
     public World()
     {
-        snake = new Snake();
+      //  snake = new Snake();
         placeToken();
     }
     // ----------------------------------------------------------
@@ -106,13 +106,14 @@ public class World extends Observable
         {
             tickTime -= tick;
             //Advance the snake.
-            snake.advance();
+           // snake.advance();
             //Set gameOver to true once the snake has bitten itself.
-            if (snake.checkBitten())
+           /* if (snake.checkBitten())
             {
                 gameOver = true;
                 return;
             }
+            */
             //Reset the head as the first segment in the snake.
             SnakePart head = snake.parts.get(0);
             //Check if the snake has "eaten" a token.
@@ -121,7 +122,7 @@ public class World extends Observable
                 //Increase score
                 score += SCORE_INCREMENT;
                 //Adds another segment
-                snake.eat();
+               // snake.eat();
                 //Check if the snake has completely occupied the game world.
                 if (snake.parts.size() == WORLD_WIDTH * WORLD_HEIGHT)
                 {

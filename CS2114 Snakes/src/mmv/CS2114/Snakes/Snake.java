@@ -1,92 +1,74 @@
+/**
+ * 
+ */
 package mmv.CS2114.Snakes;
 
-import java.util.Observable;
 import java.util.ArrayList;
 import java.util.List;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.view.MotionEvent;
 
-// -------------------------------------------------------------------------
 /**
- *  Snake class used to represent the snake as an entity.
- *
- *  Has an ArrayList of SnakePart objects representing the head and tails, then
- *  an int value indicating where the snake is currently heading direction
- *  wise.
- *
- *  @author Mike Gazdich (mgazdich)
- *  @version 2012.04.14
+ * This is a test droid that is dragged, dropped, moved, smashed against the
+ * wall and done other terrible things with. Wait till it gets a weapon!
+ * 
+ * @author impaler
  */
-public class Snake extends Observable
+public class Snake
 {
 
-    // Fields ---------------------------------------------------------------
-    public static final int UP = 0;
-    public static final int LEFT = 1;
-    public static final int DOWN = 2;
+    private Bitmap          bitmap;               // the actual
+// bitmap
+    private boolean         touched;         // if droid is touched/picked up
+    public static final int UP    = 0;
+    public static final int LEFT  = 1;
+    public static final int DOWN  = 2;
     public static final int RIGHT = 3;
+    
+    public boolean grid[][] = new boolean [12][16];
+    public List<SnakePart>  parts = new ArrayList<SnakePart>();
+    public int              direction;
 
-    public List<SnakePart> parts = new ArrayList<SnakePart>();
-    public int direction;
 
-
-    // Constructor ---------------------------------------------------------
-
-    /**
-     * Initializes the Snake object for when the game begins.
-     */
-    public Snake()
+    public Snake(Bitmap bitmap, int x, int y)
     {
-        direction = UP;
-        parts.add(new SnakePart(5,6));
-        parts.add(new SnakePart(5,7));
-        parts.add(new SnakePart(5,8));
+        this.bitmap = bitmap;
+        parts.add(new SnakePart(x, y));
+        parts.add(new SnakePart(x + 1, y));
+        parts.add(new SnakePart(x + 2, y));
+        parts.add(new SnakePart(x + 3, y));
+        parts.add(new SnakePart(x + 4, y));
     }
 
-    // Methods --------------------------------------------------------------
 
-    /**
-     * Deals with having the snake turn to the left.
-     */
-    public void turnLeft()
+    public Bitmap getBitmap()
     {
-        direction += 1;
-        if (direction > RIGHT)
+        return bitmap;
+    }
+
+
+    public void setBitmap(Bitmap bitmap)
+    {
+        this.bitmap = bitmap;
+    }
+
+
+    public void draw(Canvas canvas)
+    {
+        float boxSize = canvas.getWidth() / 13;
+        for (SnakePart s : parts)
         {
-            direction = UP;
+            canvas.drawBitmap(bitmap, s.x * boxSize, s.y * boxSize, null);
         }
-        setChanged();
-        notifyObservers();
+        // canvas.drawB
     }
 
-    /**
-     * Deals with having the snake turn to the right.
-     */
-    public void turnRight()
-    {
-        direction -= 1;
-        if (direction < UP)
-        {
-            direction = RIGHT;
-        }
-        setChanged();
-        notifyObservers();
-    }
 
     /**
-     * Has the Snake add a new part to the end of its body when it eats a token.
+     * Method which updates the droid's internal state every tick
      */
-    public void eat()
-    {
-        SnakePart end = parts.get(parts.size() - 1);
-        parts.add(new SnakePart(end.x, end.y));
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Advances each part of the snake one cell in the direction it is currently
-     * moving in.
-     */
-    public void advance()
+    public void update()
     {
         SnakePart head = parts.get(0);
 
@@ -100,7 +82,6 @@ public class Snake extends Observable
             part.x = before.x;
             part.y = before.y;
         }
-
         // Next we move the head in on position depending on where it is
         // currently heading
         if (direction == UP)
@@ -124,48 +105,19 @@ public class Snake extends Observable
         // if he goes through on side of the screen.
         if (head.x < 0)
         {
-            head.x = 9;
+            head.x = 12;
         }
-        if (head.x > 9)
+        if (head.x > 12)
         {
             head.x = 0;
         }
         if (head.y < 0)
         {
-            head.y = 12;
+            head.y = 17;
         }
-        if (head.y > 12)
+        if (head.y > 17)
         {
             head.y = 0;
         }
-        
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Checks to see if the snake has ran into himself at some point, if so, the
-     * game is over.
-     *
-     * @return Whether he has bitten himself or not.
-     */
-    public boolean checkBitten()
-    {
-        int len = parts.size();
-        SnakePart head = parts.get(0);
-        for (int i = 1; i < len; i++)
-        {
-            SnakePart part = parts.get(i);
-            if (part.x == head.x && part.y == head.y)
-            {
-                return true;
-            }
-        }
-        setChanged();
-        notifyObservers();
-        return false;
-        
     }
 }
-
-

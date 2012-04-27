@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, CS2114SnakesActivity!</string>
-    <string name="app_name">CS2114 Snakes</string>
-    <string name="Left"></string>
-    <string name="left">Left</string>
-    <string name="right">Right</string>
+    <string name="hello">Hello World, HokieSnakeActivity!</string>
+    <string name="app_name">HokieSnake</string>
+    <string name="Left">Left</string>
+    <string name="Right">Right</string>
 
 </resources>

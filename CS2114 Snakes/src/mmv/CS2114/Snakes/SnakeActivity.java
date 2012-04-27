@@ -1,57 +1,49 @@
 package mmv.CS2114.Snakes;
 
+
 import android.view.View;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
 
-// -------------------------------------------------------------------------
-/**
- * @author Michael Moy (mmoy92)
- * @author Vincent Ngo (vincentn)
- * @version 2012.14.04
- */
-
-public class SnakeActivity
-    extends Activity
-{
-    private WorldView worldView;
-    private World     world;
-    private Snake     snake;
-    private Token     token;
-
-
+public class SnakeActivity extends Activity {
+    /** Called when the activity is first created. */
+	
+	private static final String TAG = SnakeActivity.class.getSimpleName();
+	private MainGamePanel panel;
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // requesting to turn the title OFF
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // making it full screen
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // set our MainGamePanel as the View
         setContentView(R.layout.main);
-
-        // Retrieve mazeView
-        //worldView = (WorldView)findViewById(R.id.WorldView);
-
-        snake = new Snake();
-        token = new Token(1, 5);
-
-        // Create new maze, assign it to the mazeView
-        //world = new World(snake, token);
-        //worldView.setWorld(world);
-
+        panel = (MainGamePanel)findViewById(R.id.game);
+        Log.d(TAG, "View added");
     }
-
-
-    public void leftButtonClick(View view)
+    public void clickLeft(View view)
     {
-        world.snake.turnLeft();
-        // world.update(deltaTime);
+        panel.changeLeft();
+
     }
-
-
-    public void rightButtonClick(View view)
+    public void clickRight(View view)
     {
-        world.snake.turnRight();
-    }
+        panel.changeRight();
 
+    }
+	@Override
+	protected void onDestroy() {
+		Log.d(TAG, "Destroying...");
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onStop() {
+		Log.d(TAG, "Stopping...");
+		super.onStop();
+	}
+    
+    
 }
