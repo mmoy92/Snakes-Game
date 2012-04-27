@@ -26,6 +26,7 @@ public class Snake
     public static final int WIDTH    = 12;
     public static final int HEIGHT   = 17;
     private Bitmap          bitmap;
+    private Bitmap          tokenBitmap;
     Random                  random   = new Random();
 
     public boolean          grid[][] = new boolean[WIDTH][HEIGHT];
@@ -35,9 +36,10 @@ public class Snake
     public int              score;
 
 
-    public Snake(Bitmap bitmap, int x, int y)
+    public Snake(Bitmap bitmap, Bitmap tokenBitmap, int x, int y)
     {
         this.bitmap = bitmap;
+        this.tokenBitmap = tokenBitmap;
         parts.add(new SnakePart(x, y));
         parts.add(new SnakePart(x + 1, y));
         parts.add(new SnakePart(x + 2, y));
@@ -65,12 +67,12 @@ public class Snake
         {
             canvas.drawBitmap(bitmap, s.x * boxSize, s.y * boxSize, null);
         }
-        Bitmap tokenBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.droid_1)
+
         canvas.drawBitmap(
-            tokenBitmap
-            , token.x * boxSize
-            , token.y * boxSize
-            , null);
+            tokenBitmap,
+            token.x * boxSize,
+            token.y * boxSize,
+            null);
     }
 
 
