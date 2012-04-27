@@ -122,7 +122,7 @@ public class World extends Observable
                 //Increase score
                 score += SCORE_INCREMENT;
                 //Adds another segment
-               // snake.eat();
+               snake.eat();
                 //Check if the snake has completely occupied the game world.
                 if (snake.parts.size() == WORLD_WIDTH * WORLD_HEIGHT)
                 {

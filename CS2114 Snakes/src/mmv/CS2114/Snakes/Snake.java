@@ -3,6 +3,8 @@
  */
 package mmv.CS2114.Snakes;
 
+import android.graphics.BitmapFactory;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 import android.graphics.Bitmap;
@@ -17,18 +19,20 @@ import android.view.MotionEvent;
  */
 public class Snake
 {
+    public static final int UP       = 0;
+    public static final int LEFT     = 1;
+    public static final int DOWN     = 2;
+    public static final int RIGHT    = 3;
+    public static final int WIDTH    = 12;
+    public static final int HEIGHT   = 17;
+    private Bitmap          bitmap;
+    Random                  random   = new Random();
 
-    private Bitmap          bitmap;               // the actual
-// bitmap
-    private boolean         touched;         // if droid is touched/picked up
-    public static final int UP    = 0;
-    public static final int LEFT  = 1;
-    public static final int DOWN  = 2;
-    public static final int RIGHT = 3;
-    
-    public boolean grid[][] = new boolean [12][16];
-    public List<SnakePart>  parts = new ArrayList<SnakePart>();
+    public boolean          grid[][] = new boolean[WIDTH][HEIGHT];
+    public List<SnakePart>  parts    = new ArrayList<SnakePart>();
     public int              direction;
+    public Token            token;
+    public int              score;
 
 
     public Snake(Bitmap bitmap, int x, int y)
@@ -61,7 +65,12 @@ public class Snake
         {
             canvas.drawBitmap(bitmap, s.x * boxSize, s.y * boxSize, null);
         }
-        // canvas.drawB
+        Bitmap tokenBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.droid_1)
+        canvas.drawBitmap(
+            tokenBitmap
+            , token.x * boxSize
+            , token.y * boxSize
+            , null);
     }
 
 
@@ -81,6 +90,19 @@ public class Snake
             SnakePart part = parts.get(i);
             part.x = before.x;
             part.y = before.y;
+
+            if (part.x == head.x && part.y == head.y)
+            {
+                // BITTEN
+            }
+            else if (head.x == token.x && head.y == token.y)
+            {
+                score++;
+                SnakePart end = parts.get(parts.size() - 1);
+                parts.add(new SnakePart(end.x, end.y));
+
+                placeToken();
+            }
         }
         // Next we move the head in on position depending on where it is
         // currently heading
@@ -101,23 +123,66 @@ public class Snake
             head.x += 1;
         }
 
-        // Then we deal with wrapping the snake through to the other side of the board
+        // Then we deal with wrapping the snake through to the other side of the
+// board
         // if he goes through on side of the screen.
         if (head.x < 0)
         {
-            head.x = 12;
+            head.x = WIDTH;
         }
-        if (head.x > 12)
+        if (head.x > WIDTH)
         {
             head.x = 0;
         }
         if (head.y < 0)
         {
-            head.y = 17;
+            head.y = HEIGHT;
         }
-        if (head.y > 17)
+        if (head.y > HEIGHT)
         {
             head.y = 0;
         }
+    }
+
+
+    public void placeToken()
+    {
+        // Sets the size for the fields array.
+        for (int x = 0; x < WIDTH; x++)
+        {
+            for (int y = 0; y < WIDTH; y++)
+            {
+                grid[x][y] = false;
+            }
+        }
+        // Loop through the number of segments in the snake.
+        for (SnakePart myPart : parts)
+        {
+            // Set all cells occupied by the snake to TRUE
+            grid[myPart.x][myPart.y] = true;
+        }
+        // Set a random XY location for the token.
+        int tokenX = random.nextInt(WIDTH);
+        int tokenY = random.nextInt(HEIGHT);
+        while (true)
+        {
+            // End while loop if the cell is FALSE (not occupied)
+            if (grid[tokenX][tokenY] == false)
+            {
+                break;
+            }
+            // Advance the token position up to the XY boundaries.
+            tokenX += 1;
+            if (tokenX >= WIDTH)
+            {
+                tokenX = 0;
+                tokenY += 1;
+                if (tokenY >= WIDTH)
+                {
+                    tokenY = 0;
+                }
+            }
+        }
+        token = new Token(tokenX, tokenY);
     }
 }
