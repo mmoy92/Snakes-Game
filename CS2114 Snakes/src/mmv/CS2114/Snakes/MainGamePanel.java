@@ -40,8 +40,8 @@ public class MainGamePanel
             new Snake(BitmapFactory.decodeResource(
                 getResources(),
                 R.drawable.droid_1), BitmapFactory.decodeResource(
-                getResources(),
-                R.drawable.token), 8, 2);
+                    getResources(),
+                    R.drawable.token), 8, 2);
 
         // create the game loop thread
         thread = new MainThread(getHolder(), this);

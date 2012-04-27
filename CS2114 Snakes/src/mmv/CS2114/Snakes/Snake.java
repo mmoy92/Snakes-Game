@@ -26,7 +26,7 @@ public class Snake
     public static final int WIDTH    = 12;
     public static final int HEIGHT   = 17;
     private Bitmap          bitmap;
-    private Bitmap          tokenBitmap;
+    private Bitmap tokenBitmap;
     Random                  random   = new Random();
 
     public boolean          grid[][] = new boolean[WIDTH][HEIGHT];
@@ -36,8 +36,9 @@ public class Snake
     public int              score;
 
 
-    public Snake(Bitmap bitmap, Bitmap tokenBitmap, int x, int y)
+    public Snake(Bitmap bitmap,Bitmap tokenBitmap, int x, int y)
     {
+        placeToken();
         this.bitmap = bitmap;
         this.tokenBitmap = tokenBitmap;
         parts.add(new SnakePart(x, y));
@@ -69,10 +70,10 @@ public class Snake
         }
 
         canvas.drawBitmap(
-            tokenBitmap,
-            token.x * boxSize,
-            token.y * boxSize,
-            null);
+            tokenBitmap
+            , token.x * boxSize
+            , token.y * boxSize
+            , null);
     }
 
 
@@ -100,7 +101,7 @@ public class Snake
             else if (head.x == token.x && head.y == token.y)
             {
                 score++;
-                SnakePart end = parts.get(parts.size() - 1);
+                SnakePart end = parts.get(len - 1);
                 parts.add(new SnakePart(end.x, end.y));
 
                 placeToken();
